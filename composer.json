@@ -1,0 +1,31 @@
+{
+  "name": "AtCliffUnderline/yandex-dialogues-sdk",
+  "description": "Yandex dialogs API PHP-wrapper",
+  "keywords": [
+    "Yandex",
+    "PHP",
+    "Dialogs",
+    "Dialogues",
+    "API"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/AtCliffUnderline/yandex-dialogues-sdk",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "AtCliff_",
+      "homepage": "https://github.com/AtCliffUnderline/"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "ext-json": "*"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "YaDialogues\\": "src/"
+    }
+  }
+}
