@@ -4,12 +4,14 @@ declare(strict_types=1);
 namespace YaDialogues;
 
 
-class Response
+use TextNotProvidedException;
+use YaDialogues\Response\Button;
+
+class Response extends Button
 {
     private $dialogue;
     private $text;
     private $tts;
-    private $buttons;
     private $isEndSession;
 
     public function __construct(Dialogue $dialogue)
@@ -17,15 +19,23 @@ class Response
         $this->dialogue = $dialogue;
     }
 
+    /**
+     * Создает массив, который необходимо отдать в качестве ответа Алисе
+     * @return array
+     * @throws TextNotProvidedException
+     */
     public function buildResponse()
     {
+        if(!$this->text) {
+            throw new TextNotProvidedException();
+        }
         return [
             'response' => [
                 'text' => $this->text,
                 'tts' => $this->tts,
                 'buttons' => $this->buttons
             ],
-            'end_session' => $this->isEndSession,
+            'end_session' => $this->isEndSession ?? false,
             'session' => [
                 'session_id' => $this->dialogue->getRequest()->getSession()->getSessionId(),
                 'message_id' => $this->dialogue->getRequest()->getSession()->getMessageId(),
@@ -35,18 +45,12 @@ class Response
         ];
     }
 
-    public function addButton(string $title, string $payload, string $url, bool $hide)
-    {
-        $this->buttons[] = [
-            'title' => $title,
-            'payload' => $payload,
-            'url' => $url,
-            'hide' => $hide
-        ];
-
-        return $this;
-    }
-
+    /**
+     * Добавить текст ответа
+     *
+     * @param string $text
+     * @return $this
+     */
     public function setText(string $text)
     {
         $this->text = $text;
@@ -55,6 +59,8 @@ class Response
     }
 
     /**
+     * Добавить текст, который будет проговорен
+     *
      * @param string $tts
      * @return Response
      */
@@ -66,6 +72,8 @@ class Response
     }
 
     /**
+     * Установить флаг сессии
+     *
      * @param bool $isEndSession
      * @return Response
      */
@@ -74,5 +82,13 @@ class Response
         $this->isEndSession = $isEndSession;
 
         return $this;
+    }
+
+    /**
+     * @return Dialogue
+     */
+    public function getDialogue(): Dialogue
+    {
+        return $this->dialogue;
     }
 }

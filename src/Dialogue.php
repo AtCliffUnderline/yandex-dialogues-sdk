@@ -54,4 +54,12 @@ class Dialogue
     {
         return $this->response;
     }
+
+    /**
+     * @return string
+     */
+    public function getOAuthToken(): string
+    {
+        return $this->OAuthToken;
+    }
 }
