@@ -1,5 +1,5 @@
 {
-  "name": "AtCliffUnderline/yandex-dialogues-sdk",
+  "name": "atcliff/yandex-dialogues-sdk",
   "description": "Yandex dialogs API PHP-wrapper",
   "keywords": [
     "Yandex",
@@ -19,9 +19,11 @@
   ],
   "require": {
     "php": ">=7.1",
-    "ext-json": "*"
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.3"
   },
   "require-dev": {
+
   },
   "autoload": {
     "psr-4": {
