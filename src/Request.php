@@ -57,7 +57,7 @@ class Request
         $this->body
             ->setCommand($request['request']['command'])
             ->setNlu($nlu)
-            ->setPayload($request['request']['payload']);
+            ->setPayload($request['request']['payload'] ?? '');
 
         $this->session
             ->setIsNew($request['session']['new'])

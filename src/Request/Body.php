@@ -8,7 +8,7 @@ use YaDialogues\Request\Body\NLU;
 
 class Body
 {
-    /** @var string Текст запроса */
+    /** @var ?string Текст запроса */
     private $command;
 
     /** @var ?string JSON, полученный с нажатой кнопкой от обработчика навыка (в ответе на предыдущий запрос) */
@@ -20,7 +20,7 @@ class Body
     /**
      * @return string
      */
-    public function getCommand(): string
+    public function getCommand(): ?string
     {
         return $this->command;
     }
@@ -46,7 +46,7 @@ class Body
      * @param string $command
      * @return Body
      */
-    public function setCommand(string $command): Body
+    public function setCommand(?string $command): Body
     {
         $this->command = $command;
 
